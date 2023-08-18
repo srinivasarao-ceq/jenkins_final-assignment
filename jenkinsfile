@@ -31,9 +31,10 @@ pipeline {
         stage('Terraform Plan') {
 
              when{
-                 expression {
-                           return env.CHANGE_ID != null
-                           }
+                // expression {
+                  //         return env.CHANGE_ID != null
+                    //       }
+               changeset "[https://github.com/srinivasarao-ceq/jenkins_final-assignment.git]"
              }
             steps {
                  sh 'terraform plan'
