@@ -43,7 +43,7 @@ pipeline {
         stage('Terraform Apply') {
                when{
                  expression {
-                           return env.CHANGE_TARGET == 'main' && env.CHANGE_ID == null
+                           changeset "main/**"
                  }         
          }
             steps {
