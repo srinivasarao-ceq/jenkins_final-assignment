@@ -10,11 +10,11 @@ pipeline {
     }
 
     stages {
-        // stage('Checkout') {
-        //     steps {
-        //        git branch: 'main', changelog: false, credentialsId: 'Git_credentials', poll: false, url: 'https://github.com/srinivasarao-ceq/jenkins_final-assignment.git'
-        //     }
-        // }
+        stage('Checkout') {
+            steps {
+               git branch: 'main', changelog: false, credentialsId: 'Git_credentials', poll: false, url: 'https://github.com/srinivasarao-ceq/jenkins_final-assignment.git'
+            }
+        }
          stage('aws') {
             steps {
                 sh 'aws s3 ls'
@@ -22,18 +22,17 @@ pipeline {
         }
 
 
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
 
-        // stage('Terraform Init') {
-        //     steps {
-        //         sh 'terraform init'
-        //     }
-        // }
-
-        // stage('Terraform Plan') {
-        //     steps {
-        //          sh 'terraform plan'
-        //     }
-        // }
+        stage('Terraform Plan') {
+            steps {
+                 sh 'terraform plan'
+            }
+        }
 
         // stage('Terraform Apply') {
         //     steps {
