@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "tu-terraform-data"
+    bucket = "msr-k8s-backup"
     key    = "terraformfiles/terraform.tfstate"
-    region = "us-east-1"
+    region = "ap-south-1"
   }
 }
