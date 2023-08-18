@@ -1,6 +1,6 @@
 pipeline {
     agent any
-   parameters {
+    parameters {
         string(name: 'REGION', defaultValue: 'ap-southeast-1', description: 'Select the region')
     }
     environment {
@@ -31,10 +31,9 @@ pipeline {
         stage('Terraform Plan') {
 
              when{
-                // expression {
-                  //         return env.CHANGE_ID != null
-                    //       }
-               changeset "[https://github.com/srinivasarao-ceq/jenkins_final-assignment.git]"
+                 expression {
+                          return env.CHANGE_ID != null
+                       }
              }
             steps {
                  sh 'terraform plan'
@@ -44,11 +43,9 @@ pipeline {
         stage('Terraform Apply') {
                when{
                  expression {
-
-
-                           changeset "main/**"
-                }         
-         }
+                          changeset "main/**"
+                   }         
+               }
             steps {
                 sh 'terraform apply -auto-approve'
             }
