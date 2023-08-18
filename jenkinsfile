@@ -29,6 +29,11 @@ pipeline {
         }
 
         stage('Terraform Plan') {
+             when{
+                 expression {
+                           return env.CHANGE_ID != null
+                           }
+             }
             steps {
                  sh 'terraform plan'
             }
