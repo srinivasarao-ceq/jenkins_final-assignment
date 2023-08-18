@@ -43,8 +43,10 @@ pipeline {
         stage('Terraform Apply') {
                when{
                  expression {
+
+
                            changeset "main/**"
-                 }         
+                }         
          }
             steps {
                 sh 'terraform apply -auto-approve'
