@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+   parameters {
+        string(name: 'REGION', defaultValue: 'ap-southeast-1', description: 'Select the region')
+    }
+    environment {
+        AWS_DEFAULT_REGION = '${params.REGION}' // Set your desired AWS region
+        AWS_CONFIGURE = credentials('aws_credentials')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+               git branch: 'main', changelog: false, credentialsId: 'Git_credentials', poll: false, url: 'https://github.com/srinivasarao-ceq/jenkins_final-assignment.git'
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                 sh 'terraform plan'
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                sh 'terraform apply -auto-approve'
+            }
+        }   		
+    }
+}
