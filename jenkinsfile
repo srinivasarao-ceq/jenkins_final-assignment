@@ -4,7 +4,7 @@ pipeline {
         string(name: 'REGION', defaultValue: 'ap-southeast-1', description: 'Select the region')
     }
     environment {
-        AWS_DEFAULT_REGION = ${params.REGION} // Set your desired AWS region
+        AWS_DEFAULT_REGION = "${params.REGION}" // Set your desired AWS region
         AWS_CONFIGURE = credentials('aws_credentials')
         //  withCredentials([aws(credentialsId: 'aws_credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')])
     }
