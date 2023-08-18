@@ -29,7 +29,8 @@ pipeline {
         }
 
         stage('Terraform Plan') {
-            when{
+
+             when{
                  expression {
                            return env.CHANGE_ID != null
                            }
